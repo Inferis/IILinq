@@ -1,6 +1,5 @@
 //
 //  IILinq.h
-//  Resigner
 //
 //  Created by Tom Adriaenssen on 21/05/14.
 //  Copyright (c) 2014 Tom Adriaenssen. All rights reserved.

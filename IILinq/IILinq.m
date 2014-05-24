@@ -1,6 +1,5 @@
 //
 //  IILinq.m
-//  Resigner
 //
 //  Created by Tom Adriaenssen on 21/05/14.
 //  Copyright (c) 2014 Tom Adriaenssen. All rights reserved.
@@ -145,7 +144,8 @@
     return ^IILinq*(NSUInteger skip) {
         __block NSUInteger count = skip;
         return self.select(^id(id item) {
-            if (count-- > 0) {
+            if (count > 0) {
+                count--;
                 return nil;
             }
             else {
@@ -160,7 +160,8 @@
     return ^IILinq*(NSUInteger skip) {
         __block NSUInteger count = skip;
         return self.select(^id(id item) {
-            if (count-- > 0) {
+            if (count > 0) {
+                count--;
                 return item;
             }
             else {
@@ -310,23 +311,26 @@
     }
 
     // check source objects now
-    id nextSource = [_source nextObject];
-    if (!nextSource) {
-        // iteration is over. Reset source and processors so they can be freed even though
-        // the enumerator might be kept around.
-        _source = nil;
-        _processors = nil;
-        return nil;
-    }
+    id result = nil;
+    while (!result) {
+        id nextSource = [_source nextObject];
+        if (!nextSource) {
+            // iteration is over. Reset source and processors so they can be freed even though
+            // the enumerator might be kept around.
+            _source = nil;
+            _processors = nil;
+            return nil;
+        }
 
-    // process the source object. This can result into multiple result objects (thanks to selectMany).
-    // if we get more than one back, store these in a buffer
-    NSArray* items = [self processItem:nextSource];
-    id result = [items firstObject];
-    if (items.count > 1) {
-        // remember other items so we can return them next
-        _buffer = [NSMutableArray arrayWithArray:items];
-        [_buffer removeObjectAtIndex:0];
+        // process the source object. This can result into multiple result objects (thanks to selectMany).
+        // if we get more than one back, store these in a buffer
+        NSArray* items = [self processItem:nextSource];
+        result = [items firstObject];
+        if (items.count > 1) {
+            // remember other items so we can return them next
+            _buffer = [NSMutableArray arrayWithArray:items];
+            [_buffer removeObjectAtIndex:0];
+        }
     }
 
     return result;
