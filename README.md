@@ -60,18 +60,17 @@ It will behave properly when just enumerating:
 ```objc
 NSArray *bunchOfInts = @[@7, @9, @7, @2, @0, @4];
 
-IILinq *filtered = bunchOfInts.ii_skip(2).select(^(NSNumber* num) {
+IILinq *filtered = bunchOfInts.ii_skip(2).select(^id(NSNumber* num) {
   NSLog(@"processing %@", num);
-  return [NSString stringWithFormat:"%@%@", item, item];
+  return [NSString stringWithFormat:@"%@%@", num, num];
 });
 
-for (NSNumber* item in filtered) {
+for (NSString* item in filtered) {
   NSLog(@"Got %@", item);
   if ([item isEqualToString:@"00"]) {
     break;
   }
 }
-
 // Logs:
 // processing 7
 // Got 77
