@@ -38,7 +38,7 @@ NSArray *bunchOfInts = @[@7, @9, @7, @2, @0, @4];
 NSArray *result = bunchOfInts.ii_where(^BOOL(id item) {
   return [item integerValue] > 5;
 }).select(^id(id item) {
-  return [NSString stringWithFormat:"%@%@", item, item];
+  return [NSString stringWithFormat:@"%@%@", item, item];
 }).allObjects;
 
 // result = @[@"77", @"99", @"77"]

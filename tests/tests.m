@@ -33,4 +33,17 @@ int main() {
   NSArray *expected = @[@"77", @"99", @"77", @"22", @"00", @"44"];
   XCTAssertEqualObjects(result, expected);
 }
+
+- (void)test_readme_shorthand {
+  NSArray *bunchOfInts = @[@7, @9, @7, @2, @0, @4];
+
+  NSArray *result = bunchOfInts.ii_where(^BOOL(id item) {
+      return [item integerValue] > 5;
+    }).select(^id(id item) {
+        return [NSString stringWithFormat:@"%@%@", item, item];
+      }).allObjects;
+
+  NSArray *expected = @[@"77", @"99", @"77"];
+  XCTAssertEqualObjects(result, expected);
+}
 @end
