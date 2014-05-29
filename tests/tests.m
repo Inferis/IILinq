@@ -46,4 +46,30 @@ int main() {
   NSArray *expected = @[@"77", @"99", @"77"];
   XCTAssertEqualObjects(result, expected);
 }
+
+- (void)test_readme_inject {
+  id sum = @[@1, @2, @3, @4].ii_inject(@0, ^(NSNumber* result, NSNumber* element) {
+      return @([result integerValue] + [element integerValue]);
+    });
+  NSString *result = [NSString stringWithFormat:@"result = %@", sum];
+  XCTAssertEqualObjects(@"result = 10", result);
+}
+
+- (void)test_readme_enumerating {
+  NSArray *bunchOfInts = @[@7, @9, @7, @2, @0, @4];
+  NSMutableArray *result = @[].mutableCopy;
+  IILinq *filtered = bunchOfInts.ii_skip(2).select(^id(NSNumber* num) {
+      [result addObject:[NSString stringWithFormat:@"processing %@", num]];
+      return [NSString stringWithFormat:@"%@%@", num, num];
+    });
+
+  for (NSString* item in filtered) {
+    [result addObject:[NSString stringWithFormat:@"Got %@", item]];
+    if ([item isEqualToString:@"00"]) {
+      break;
+    }
+  }
+  NSArray *expected = @[@"processing 7", @"Got 77", @"processing 2", @"Got 22", @"processing 0", @"Got 00"];
+  XCTAssertEqualObjects(expected, result);
+}
 @end
