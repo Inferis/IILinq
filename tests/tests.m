@@ -17,13 +17,20 @@ int main() {
     }
 }
 
+#import "IILinq/IILinq.m"
+
 @interface Tests : XCTestCase
 @end
 
-
 @implementation Tests
 
-- (void)test_it_works {
-  XCTAssertTrue(YES);
+- (void)test_readme_select {
+  NSArray *bunchOfInts = @[@7, @9, @7, @2, @0, @4];
+
+  NSArray *result = bunchOfInts.ii_linq.select(^id(id item) {
+      return [NSString stringWithFormat:@"%@%@", item, item];
+    }).allObjects;
+  NSArray *expected = @[@"77", @"99", @"77", @"22", @"00", @"44"];
+  XCTAssertEqualObjects(result, expected);
 }
 @end

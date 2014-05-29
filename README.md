@@ -24,7 +24,7 @@ So, you can do stuff like this:
 NSArray *bunchOfInts = @[@7, @9, @7, @2, @0, @4];
 
 NSArray *result = bunchOfInts.ii_linq.select(^id(id item) {
-  return [NSString stringWithFormat:"%@%@", item, item];
+  return [NSString stringWithFormat:@"%@%@", item, item];
 }).allObjects;
 
 // result = @[@"77", @"99", @"77", @"22", @"00", @"44"]
