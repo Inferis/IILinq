@@ -81,6 +81,18 @@ for (NSString* item in filtered) {
 // Got 00
 ```
 
+## Testing
+
+Tests are based on [Mxcl](https://github.com/mxcl)'s ruby based test "framework".
+
+Running tests: cd into the root folder of the project then:
+
+```
+tests/xctest.rb
+```
+
+And that's it.
+
 ## Current state
 
 * Highly experimental.
