@@ -5,7 +5,7 @@
 //  Copyright (c) 2014 Tom Adriaenssen. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 
 @class IILinq;
 
@@ -59,4 +59,3 @@ typedef IILinq*(^IILinq_TakeOrSkip)(NSUInteger count);
 @property (nonatomic, copy, readonly) IILinq_Inject ii_inject;
 
 @end
-

@@ -56,7 +56,7 @@
     return [IILinqEnumerator enumeratorFor:self reverse:YES];
 }
 
-- (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(id __unsafe_unretained [])buffer count:(NSUInteger)len;
+- (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(id __unsafe_unretained [])buffer count:(NSUInteger)len
 {
     NSEnumerator *enumerator;
     if (state->extra[0]) {

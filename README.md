@@ -24,7 +24,7 @@ So, you can do stuff like this:
 NSArray *bunchOfInts = @[@7, @9, @7, @2, @0, @4];
 
 NSArray *result = bunchOfInts.ii_linq.select(^id(id item) {
-  return [NSString stringWithFormat:"%@%@", item, item];
+  return [NSString stringWithFormat:@"%@%@", item, item];
 }).allObjects;
 
 // result = @[@"77", @"99", @"77", @"22", @"00", @"44"]
@@ -38,7 +38,7 @@ NSArray *bunchOfInts = @[@7, @9, @7, @2, @0, @4];
 NSArray *result = bunchOfInts.ii_where(^BOOL(id item) {
   return [item integerValue] > 5;
 }).select(^id(id item) {
-  return [NSString stringWithFormat:"%@%@", item, item];
+  return [NSString stringWithFormat:@"%@%@", item, item];
 }).allObjects;
 
 // result = @[@"77", @"99", @"77"]
@@ -85,12 +85,9 @@ for (NSString* item in filtered) {
 
 * Highly experimental.
 * No example project.
-* Untested (works on OSX, no idea for iOS).
 * Unfinished:
-  * tests
   * there's a bunch of LINQ operators left to port
   * add some more cocoa-isms
-  * tests
   * more tests
 * No idea about performance but I guess it's pretty good
 
